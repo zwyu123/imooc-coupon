@@ -6,6 +6,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
  * <h1>Eureka 启动入口</h1>
+ * Created by zwyu
  */
 @EnableEurekaServer
 @SpringBootApplication
