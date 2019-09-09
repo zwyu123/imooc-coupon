@@ -27,7 +27,7 @@ public abstract class AbstractZuulFilter extends ZuulFilter {
     public Object run() throws ZuulException {
 
         context = RequestContext.getCurrentContext();
-        return null;
+        return cRun();
     }
 
     protected abstract Object cRun();
