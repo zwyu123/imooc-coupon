@@ -10,6 +10,7 @@
         <module name="coupon-common" />
         <module name="coupon-eureka" />
         <module name="coupon-gateway" />
+        <module name="coupon-template" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
       <module name="coupon-common" options="-parameters" />
       <module name="coupon-eureka" options="-parameters" />
       <module name="coupon-gateway" options="-parameters" />
+      <module name="coupon-template" options="-parameters" />
       <module name="imooc-coupon-service" options="-parameters" />
     </option>
   </component>
