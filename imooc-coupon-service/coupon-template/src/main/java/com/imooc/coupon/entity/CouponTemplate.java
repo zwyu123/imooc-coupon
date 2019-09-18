@@ -1,5 +1,6 @@
 package com.imooc.coupon.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.imooc.coupon.constant.CouponCategory;
 import com.imooc.coupon.constant.DistributeTarget;
 import com.imooc.coupon.constant.ProductLine;
@@ -7,6 +8,7 @@ import com.imooc.coupon.converter.CouponCategoryConverter;
 import com.imooc.coupon.converter.DistributeTargetConverter;
 import com.imooc.coupon.converter.ProductLineConverter;
 import com.imooc.coupon.converter.RuleConverter;
+import com.imooc.coupon.serialization.CouponTemplateSerialize;
 import com.imooc.coupon.vo.TemplateRule;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +31,7 @@ import java.util.Date;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "coupon_template")
+@JsonSerialize(using = CouponTemplateSerialize.class)
 public class CouponTemplate implements Serializable {
 
     /** 自增主键 */
@@ -109,7 +112,7 @@ public class CouponTemplate implements Serializable {
         this.productLine = ProductLine.of(productLine);
         this.count = count;
         this.userId = userId;
-        // 优惠券唯一编码 = 4(产品线和类型) + 8(日期: 20190101) + id(扩充为4位)
+        // 优惠券模板唯一编码 = 4(产品线和类型) + 8(日期: 20190101) + id(扩充为4位)
         this.key = productLine.toString() + category +
                 new SimpleDateFormat("yyyyMMdd").format(new Date());
         this.target = DistributeTarget.of(target);
