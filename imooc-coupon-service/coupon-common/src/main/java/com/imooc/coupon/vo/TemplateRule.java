@@ -31,6 +31,16 @@ public class TemplateRule {
     private String weight;
 
     /**
+     * <h2>检验功能</h2>
+     * */
+    public boolean validate() {
+
+        return expiration.validate() && discount.validate()
+                && limitation > 0 && usage.validate()
+                && StringUtils.isNotEmpty(weight);
+    }
+
+    /**
      * <h2>有效期限规则</h2>
      */
     @Data
