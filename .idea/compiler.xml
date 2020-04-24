@@ -8,13 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="coupon-common" />
+        <module name="coupon-distribution" />
         <module name="coupon-eureka" />
         <module name="coupon-gateway" />
         <module name="coupon-template" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="coupon-distribution" target="1.8" />
       <module name="coupon-settlement" target="1.8" />
     </bytecodeTargetLevel>
   </component>
