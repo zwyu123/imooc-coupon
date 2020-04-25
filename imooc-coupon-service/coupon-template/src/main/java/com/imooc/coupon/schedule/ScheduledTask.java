@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * <h1>定时清理已过期的优惠券模板</h1>
- * Created by Qinyi.
  */
 @Slf4j
 @Component

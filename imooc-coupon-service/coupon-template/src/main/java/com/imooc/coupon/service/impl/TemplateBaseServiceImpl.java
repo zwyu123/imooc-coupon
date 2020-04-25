@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 /**
  * <h1>优惠券模板基础服务接口实现</h1>
- * Created by Qinyi.
  */
 @Slf4j
 @Service

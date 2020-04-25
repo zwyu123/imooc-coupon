@@ -17,7 +17,6 @@ import java.util.Map;
 
 /**
  * <h1>优惠券模板相关的功能控制器</h1>
- * Created by Qinyi.
  */
 @Slf4j
 @RestController
