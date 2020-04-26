@@ -103,14 +103,54 @@ public class RedisServiceImpl implements IRedisService {
                 JSON.toJSONString(redisTemplate.executePipelined(sessionCallback)));
     }
 
+    /**
+     * <h2>尝试从 Cache 中获取一个优惠券码</h2>
+     * @param templateId 优惠券模板主键
+     * @return 优惠券码
+     */
     @Override
     public String tryToAcquireCouponCodeFromCache(Integer templateId) {
-        return null;
+
+        String redisKey = String.format("%s%s",
+                Constant.RedisPrefix.COUPON_TEMPLATE, templateId.toString());
+        // 因为优惠券码不存在顺序关系, 左边 pop 或右边 pop, 没有影响
+        String couponCode = redisTemplate.opsForList().leftPop(redisKey);
+
+        log.info("Acquire Coupon Code: {}, {}, {}",
+                templateId, redisKey, couponCode);
+
+        return couponCode;
     }
 
+    /**
+     * <h2>将优惠券保存到 Cache 中</h2>
+     * @param userId  用户 id
+     * @param coupons {@link Coupon}s
+     * @param status  优惠券状态
+     * @return 保存成功的个数
+     */
     @Override
     public Integer addCouponToCache(Long userId, List<Coupon> coupons, Integer status) throws CouponException {
-        return null;
+
+        log.info("Add Coupon To Cache: {}, {}, {}",
+                userId, JSON.toJSONString(coupons), status);
+
+        Integer result = -1;
+        CouponStatus couponStatus = CouponStatus.of(status);
+
+        switch (couponStatus) {
+            case USABLE:
+                result = addCouponToCacheForUsable(userId, coupons);
+                break;
+            case USED:
+                result = addCouponToCacheForUsed(userId, coupons);
+                break;
+            case EXPIRED:
+                result = addCouponToCacheForExpired(userId, coupons);
+                break;
+        }
+
+        return result;
     }
 
     /**
